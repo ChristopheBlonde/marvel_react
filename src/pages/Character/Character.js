@@ -78,7 +78,7 @@ const Character = (props) => {
   };
   console.log(data);
   return isLoading ? (
-    <div>
+    <div className="loading">
       <div>Chargement en cours...</div>
     </div>
   ) : (

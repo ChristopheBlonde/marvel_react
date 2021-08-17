@@ -11,7 +11,19 @@ const CardComics = (props) => {
     handleFavorites,
     validationFavoritesHero,
     validationHero,
+    favorites,
+    _id,
   } = props;
+
+  let checkCard = false;
+  if (favorites) {
+    favorites.comics.forEach((elem) => {
+      if (_id === elem._id) {
+        checkCard = true;
+      }
+      return checkCard;
+    });
+  }
 
   return (
     <div>
@@ -25,10 +37,12 @@ const CardComics = (props) => {
         </div>
         <div className="cardBottom">
           <label htmlFor="iconFav" onClick={() => handleFavorites(index)}>
-            Clic pour ajouter au favoris
+            {checkCard
+              ? "clic pour supprimer des favoris"
+              : "Clic pour ajouter aux favoris"}
             <FontAwesomeIcon
               id="iconFav"
-              className="iconFav"
+              className={checkCard ? "iconFav" : "iconFav iconWhite"}
               onClick={() => handleFavorites(index)}
               icon="star"
             />

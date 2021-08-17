@@ -12,19 +12,21 @@ import Cookies from "js-cookie";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faEye,
+  faEyeSlash,
   faSearch,
   faStar,
   faWindowClose,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faStar, faSearch, faWindowClose);
+library.add(faStar, faSearch, faWindowClose, faEye, faEyeSlash);
 
 function App() {
   const [count, setCount] = useState("");
   const [limitCard, setLimitCard] = useState(100);
   const [token, setToken] = useState(Cookies.get("tokenMarvel") ? true : false);
-  const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenSignup, setModalIsOpenSignup] = useState(false);
+  const [favorites, setFavorites] = useState();
 
   const validationHero = "Vos favoris ont bien été modifiés";
 
@@ -66,6 +68,7 @@ function App() {
         toggleModal={toggleModal}
         modalIsOpen={modalIsOpen}
         modalIsOpenSignup={modalIsOpenSignup}
+        setFavorites={setFavorites}
       />
       <Switch>
         <Route exact path="/">
@@ -77,6 +80,8 @@ function App() {
             validationHero={validationHero}
             token={token}
             openModalLogin={openModalLogin}
+            favorites={favorites}
+            setFavorites={setFavorites}
           />
         </Route>
         <Route path="/comics/:characterid">
@@ -84,6 +89,7 @@ function App() {
             validationHero={validationHero}
             token={token}
             openModalLogin={openModalLogin}
+            favorites={favorites}
           />
         </Route>
         <Route path="/comics">
@@ -95,14 +101,11 @@ function App() {
             validationHero={validationHero}
             token={token}
             openModalLogin={openModalLogin}
+            favorites={favorites}
           />
         </Route>
         <Route path="/favorites/:id">
-          <Favorites
-            validationFavoritesHero={validationFavoritesHero}
-            setValidationFavoritesHero={setValidationFavoritesHero}
-            validationHero={validationHero}
-          />
+          <Favorites validationHero={validationHero} />
         </Route>
       </Switch>
       <Footer />

@@ -19,4 +19,17 @@ button {
   margin: 0 10px;
   background: linear-gradient(45deg, $color-terra, $color-honey);
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.loading {
+  width: 100vw;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  font-size: 40px;
+  font-family: $font-saira;
+  text-shadow: 5px 5px 5px black;
 }

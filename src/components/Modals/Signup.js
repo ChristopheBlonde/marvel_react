@@ -36,9 +36,22 @@ const MyTextInput = ({ label, ...props }) => {
 };
 
 const Signup = (props) => {
-  const { modalIsOpen, closeModal, toggleModal, setToken } = props;
+  const {
+    modalIsOpen,
+    closeModal,
+    toggleModal,
+    setToken,
+    hidePassword,
+    setHidePassword,
+  } = props;
   const [file, setFile] = useState();
   const [image, setImage] = useState(null);
+
+  /* hidden password */
+
+  const handleChangeHidden = () => {
+    setHidePassword(!hidePassword);
+  };
 
   return (
     <Modal
@@ -112,8 +125,13 @@ const Signup = (props) => {
           <MyTextInput
             label="Mot de passe"
             name="password"
-            type="password"
+            type={hidePassword ? "password" : "text"}
             placeholder="ex: Lf2r8hj9S"
+          />
+          <FontAwesomeIcon
+            onClick={handleChangeHidden}
+            className="iconPasswordSignup"
+            icon={hidePassword ? "eye" : "eye-slash"}
           />
           <label htmlFor="avatar" className="imgAvatar">
             Choisir une photo

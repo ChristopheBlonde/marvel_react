@@ -23,9 +23,22 @@ const customStyles = {
 Modal.setAppElement("body");
 
 const Login = (props) => {
-  const { modalIsOpen, closeModal, toggleModal, locationModal, setToken } =
-    props;
+  const {
+    modalIsOpen,
+    closeModal,
+    toggleModal,
+    locationModal,
+    setToken,
+    hidePassword,
+    setHidePassword,
+  } = props;
   const history = useHistory();
+
+  /* hidden password */
+
+  const handleChangeHidden = () => {
+    setHidePassword(!hidePassword);
+  };
 
   /* Formik and yup(validation)*/
 
@@ -67,7 +80,6 @@ const Login = (props) => {
       }
     },
   });
-
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -95,9 +107,17 @@ const Login = (props) => {
         {formik.touched.email && formik.errors.email ? (
           <div>{formik.errors.email}</div>
         ) : null}
-        <label htmlFor="password">Mot de passe</label>
+
+        <label htmlFor="password">
+          Mot de passe{" "}
+          <FontAwesomeIcon
+            onClick={handleChangeHidden}
+            className="iconPassword"
+            icon={hidePassword ? "eye" : "eye-slash"}
+          />
+        </label>
         <input
-          type="password"
+          type={hidePassword ? "password" : "text"}
           name="password"
           id="password"
           className="passwordInput"
@@ -105,6 +125,7 @@ const Login = (props) => {
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+
         {formik.touched.password && formik.errors.password ? (
           <div>{formik.errors.password} </div>
         ) : null}

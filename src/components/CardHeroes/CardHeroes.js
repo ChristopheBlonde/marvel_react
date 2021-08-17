@@ -13,7 +13,18 @@ const CaedHeroes = (props) => {
     handleFavorites,
     validationFavoritesHero,
     validationHero,
+    favorites,
   } = props;
+
+  let checkCard = false;
+  if (favorites) {
+    favorites.characters.forEach((elem) => {
+      if (_id === elem._id) {
+        checkCard = true;
+      }
+      return checkCard;
+    });
+  }
   return (
     <div>
       <div className="cardHeroes">
@@ -26,10 +37,12 @@ const CaedHeroes = (props) => {
         </Link>
         <div className="cardBottom">
           <label htmlFor="iconFav" onClick={() => handleFavorites(index)}>
-            Clic pour ajouter aux favoris
+            {checkCard
+              ? "clic pour supprimer des favoris"
+              : "Clic pour ajouter aux favoris"}
             <FontAwesomeIcon
               id="iconFav"
-              className="iconFav"
+              className={checkCard ? "iconFav" : "iconFav iconWhite"}
               onClick={() => handleFavorites(index)}
               icon="star"
             />

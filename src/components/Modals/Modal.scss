@@ -34,6 +34,7 @@
     label {
       margin: 10px 0;
       color: $color-stone;
+      position: relative;
     }
     input[type="file"] {
       display: none;
@@ -41,6 +42,20 @@
     .passwordInput {
       margin-bottom: 15px;
     }
+    .iconPassword,
+    .iconPasswordSignup {
+      position: absolute;
+      top: 35px;
+      right: 10px;
+      color: $color-honey;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .iconPasswordSignup {
+      top: 290px;
+      right: 25px;
+    }
+
     .imgAvatar {
       border: 1px solid $color-honey;
       border-radius: 10px;

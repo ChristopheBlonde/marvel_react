@@ -22,6 +22,7 @@ const Header = (props) => {
   } = props;
 
   const [locationModal, setLocationModal] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const location = useLocation();
   const history = useHistory();
@@ -97,6 +98,8 @@ const Header = (props) => {
         toggleModal={toggleModal}
         locationModal={locationModal}
         setToken={setToken}
+        hidePassword={hidePassword}
+        setHidePassword={setHidePassword}
       />
       <Signup
         openModal={openModalSignup}
@@ -104,6 +107,8 @@ const Header = (props) => {
         closeModal={closeModalSignup}
         toggleModal={toggleModal}
         setToken={setToken}
+        hidePassword={hidePassword}
+        setHidePassword={setHidePassword}
       />
     </header>
   );

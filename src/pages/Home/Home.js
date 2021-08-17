@@ -22,7 +22,7 @@ const Home = (props) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
-
+  const [favorites, setFavorites] = useState();
   const location = useLocation();
   const currentPage = qs.parse(location.search.substring(1)).page;
 
@@ -35,8 +35,23 @@ const Home = (props) => {
       setCount(response.data.count);
       setIsLoading(false);
     };
+
+    /* check favorite */
+    if (token) {
+      const fetchDataFavorite = async () => {
+        const res = await axios.get(
+          `http://localhost:5000/favorites/${
+            Cookies.get("infoUser").split(",")[0]
+          }`,
+          { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
+        );
+        setFavorites(res.data.favorites);
+      };
+      fetchDataFavorite();
+    }
+
     fetchData();
-  }, [searchCharater, limitCard, currentPage, setCount]);
+  }, [searchCharater, limitCard, currentPage, setCount, token]);
 
   /* input search value */
   const handleChangeCharacter = (event) => {
@@ -72,6 +87,7 @@ const Home = (props) => {
         );
 
         if (res.status === 200) {
+          setFavorites(res.data.favorites);
           setValidationFavoritesHero(index);
           setTimeout(() => {
             setValidationFavoritesHero(false);
@@ -85,7 +101,6 @@ const Home = (props) => {
     }
   };
 
-  console.log(data);
   return isLoading ? (
     <div className="loading">
       <div>Chargement en cours...</div>
@@ -139,6 +154,7 @@ const Home = (props) => {
               handleFavorites={handleFavorites}
               validationFavoritesHero={validationFavoritesHero}
               validationHero={validationHero}
+              favorites={favorites}
             />
           );
         })}

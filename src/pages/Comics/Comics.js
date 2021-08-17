@@ -22,7 +22,7 @@ const Comics = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchComics, setSearchComics] = useState("");
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
-
+  const [favorites, setFavorites] = useState();
   /* paging */
 
   const location = useLocation();
@@ -49,12 +49,29 @@ const Comics = (props) => {
       const response = await axios.get(
         `http://localhost:5000/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
       );
+      if (token) {
+        const fetchDataFavorite = async () => {
+          const res = await axios.get(
+            `http://localhost:5000/favorites/${
+              Cookies.get("infoUser").split(",")[0]
+            }`,
+            {
+              headers: {
+                authorization: `Bearer ${Cookies.get("tokenMarvel")}`,
+              },
+            }
+          );
+          setFavorites(res.data.favorites);
+        };
+        fetchDataFavorite();
+      }
+
       setCount(response.data.count);
       setData(response.data);
       setIsLoading(false);
     };
     fetchData();
-  }, [searchComics, setCount, limitCard, currentPage]);
+  }, [searchComics, setCount, limitCard, currentPage, token]);
 
   const handleChangeComic = (event) => {
     setSearchComics(event.target.value);
@@ -84,10 +101,9 @@ const Comics = (props) => {
       console.log(error);
     }
   };
-  console.log(data);
 
   return isLoading ? (
-    <div>
+    <div className="loading">
       <div>Chargement en cours...</div>
     </div>
   ) : (
@@ -128,7 +144,7 @@ const Comics = (props) => {
           return (
             <CardComics
               key={elem._id}
-              data={data.results}
+              _id={elem._id}
               name={elem.title}
               path={elem.thumbnail.path}
               extension={elem.thumbnail.extension}
@@ -137,6 +153,7 @@ const Comics = (props) => {
               handleFavorites={handleFavoritesComics}
               validationFavoritesHero={validationFavoritesHero}
               validationHero={validationHero}
+              favorites={favorites}
             />
           );
         })}

@@ -6,17 +6,13 @@ import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const Favorites = (props) => {
-  const {
-    setValidationFavoritesHero,
-    validationFavoritesHero,
-    validationHero,
-  } = props;
-
+const Favorites = ({ validationHero }) => {
   const { id } = useParams();
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [favorites, setFavorites] = useState();
+  const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,23 +20,27 @@ const Favorites = (props) => {
         `http://localhost:5000/favorites/${id}`,
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
+      setFavorites(response.data.favorites);
       setData(response.data.favorites);
       setIsLoading(false);
     };
     fetchData();
-  }, [setData, id]);
+  }, [id]);
+
   /* Add in favorites */
   const handleFavorites = async (index) => {
     try {
-      const comics = data[index];
+      const characters = data.characters[index];
       const res = await axios.put(
         `http://localhost:5000/user/update/${
           Cookies.get("infoUser").split(",")[0]
         }`,
-        { comics: comics },
+        { characters: characters },
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
+
       if (res.status === 200) {
+        setFavorites(res.data.favorites);
         setValidationFavoritesHero(index);
         setTimeout(() => {
           setValidationFavoritesHero(false);
@@ -50,36 +50,68 @@ const Favorites = (props) => {
       console.log(error);
     }
   };
-  console.log(data);
+
+  const handleFavoritesComics = async (index) => {
+    try {
+      const comics = data.comics[index];
+      const res = await axios.put(
+        `http://localhost:5000/user/update/${
+          Cookies.get("infoUser").split(",")[0]
+        }`,
+        { comics: comics },
+        { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
+      );
+      if (res.status === 200) {
+        setFavorites(res.data.favorites);
+        setValidationFavoritesHero(index);
+        setTimeout(() => {
+          setValidationFavoritesHero(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return isLoading ? (
-    <div>
+    <div className="loading">
       <div>Chargement en cours...</div>
     </div>
   ) : (
     <div className="favorites">
       <h1>Mes Favoris</h1>
       <div className="content">
-        <h2>Les Héros</h2>
-        <div>
-          {data.characters.map((elem, index) => {
-            return (
-              <div key={elem._id}>
-                <CardHeroes
-                  _id={elem}
-                  name={elem.name}
-                  path={elem.thumbnail.path}
-                  extension={elem.thumbnail.extension}
-                  description={elem.description}
-                  index={index}
-                />
-              </div>
-            );
-          })}
+        <h3>Les Héros</h3>
+        <div className="favoritesHero">
+          {data.characters.length === 0 ? (
+            <div className="emptyFavorites">
+              Tu n'as pas encore de héros en favoris
+            </div>
+          ) : (
+            data.characters.map((elem, index) => {
+              return (
+                <div key={elem._id}>
+                  <CardHeroes
+                    _id={elem._id}
+                    name={elem.name}
+                    path={elem.thumbnail.path}
+                    extension={elem.thumbnail.extension}
+                    description={elem.description}
+                    index={index}
+                    favorites={favorites}
+                    handleFavorites={handleFavorites}
+                    validationFavoritesHero={validationFavoritesHero}
+                    validationHero={validationHero}
+                  />
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
-      <div>
-        <h2>les Comics</h2>
-        <div>
+      <div className="content">
+        <h3>les Comics</h3>
+        <div className="favoritesComics">
           {data.comics.map((elem, index) => {
             return (
               <div key={elem._id}>
@@ -90,11 +122,11 @@ const Favorites = (props) => {
                   extension={elem.thumbnail.extension}
                   description={elem.description}
                   index={index}
-                  handleFavorites={handleFavorites}
+                  handleFavorites={handleFavoritesComics}
+                  favorites={favorites}
+                  validationFavoritesHero={validationFavoritesHero}
+                  validationHero={validationHero}
                 />
-                {validationFavoritesHero === index ? (
-                  <p className="validated">{validationHero}</p>
-                ) : null}
               </div>
             );
           })}

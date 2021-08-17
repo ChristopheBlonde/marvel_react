@@ -3,14 +3,43 @@
 
 /* Title */
 .favorites {
+  h1,
+  h3 {
+    text-shadow: 5px 5px 2px black;
+  }
   h1 {
     font-family: $font-caveat;
     font-size: 72px;
     text-align: center;
     margin-bottom: 50px;
   }
-  h2 {
+  h3 {
     font-family: $font-caveat;
     font-size: 50px;
+  }
+  .favoritesHero,
+  .favoritesComics {
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .emptyFavorites {
+    color: $color-terra;
+    font-family: $font-saira;
+    font-size: 40px;
+    margin: 20px 0;
+  }
+  .validated {
+    text-align: center;
+    font-family: $font-saira;
+    font-size: 24px;
+    color: navy;
   }
 }
