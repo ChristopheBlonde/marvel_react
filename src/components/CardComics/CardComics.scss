@@ -1,0 +1,65 @@
+/* Variables */
+@import "../../variables.scss";
+
+/* Comics card */
+
+.cardComics {
+  width: 600px;
+  height: 400px;
+  border: solid 2px $color-honey;
+  background: linear-gradient($color-orange, $color-honey);
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 30px;
+  box-shadow: 5px 5px 5px 2px $color-terra;
+  .headCard {
+    width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background: linear-gradient($color-yellow, $color-terra);
+    text-align: center;
+    h2 {
+      font-family: $font-caveat;
+      font-size: 36px;
+      padding: 10px 5px;
+      color: $color-terra;
+    }
+  }
+  .col-1 {
+    display: flex;
+    justify-content: center;
+    img {
+      max-height: 270px;
+      border-radius: 10px;
+      margin: 0 15px;
+    }
+    p {
+      margin-right: 15px;
+      font-family: $font-saira;
+      font-size: 18px;
+    }
+  }
+  .cardBottom {
+    font-size: 26px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    height: 50px;
+    background: linear-gradient($color-terra, $color-yellow);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    label {
+      font-size: 18px;
+      font-family: $font-saira;
+      cursor: pointer;
+    }
+    .iconFav {
+      color: $color-terra;
+      margin: 0 20px;
+      cursor: pointer;
+    }
+  }
+}

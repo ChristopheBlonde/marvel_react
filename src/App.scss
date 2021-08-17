@@ -1,0 +1,22 @@
+/* Other rules */
+@import "./variables.scss";
+body {
+  background-color: #785a46;
+  color: white;
+}
+
+.content {
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 24px;
+  font-family: $font-caveat;
+  margin: 0 10px;
+  background: linear-gradient(45deg, $color-terra, $color-honey);
+  cursor: pointer;
+}

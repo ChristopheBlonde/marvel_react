@@ -1,0 +1,16 @@
+/* Variables */
+@import "../../variables.scss";
+
+/* Title */
+.favorites {
+  h1 {
+    font-family: $font-caveat;
+    font-size: 72px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  h2 {
+    font-family: $font-caveat;
+    font-size: 50px;
+  }
+}

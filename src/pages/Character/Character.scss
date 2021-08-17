@@ -1,0 +1,30 @@
+/* Variables */
+@import "../../variables.scss";
+
+/* titles */
+.hero {
+  h1 {
+    text-align: center;
+    font-family: $font-caveat;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  h2 {
+    text-align: center;
+    font-family: $font-caveat;
+    font-size: 40px;
+    font-weight: 900;
+  }
+}
+
+/* Cards */
+.heroComics {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .validated {
+    font-family: $font-saira;
+    font-size: 24px;
+    color: navy;
+  }
+}

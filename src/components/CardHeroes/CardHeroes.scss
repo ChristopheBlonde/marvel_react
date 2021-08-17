@@ -1,0 +1,67 @@
+/* Variables */
+@import "../../variables.scss";
+
+/* Card heroes */
+.cardHeroes {
+  width: 350px;
+  height: 600px;
+  border: solid 2px gold;
+  background: linear-gradient($color-yellow, rgb(250, 236, 35));
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin: 40px;
+  box-shadow: 5px 5px 5px 2px $color-terra;
+
+  .headCard {
+    width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background: linear-gradient(gold, $color-orange);
+    text-align: center;
+    h2 {
+      font-family: $font-caveat;
+      font-size: 36px;
+      padding: 10px 5px;
+      color: $color-terra;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  img {
+    width: 100%;
+    max-height: 350px;
+    border-radius: 10px;
+  }
+  p {
+    color: $color-stone;
+    margin: 0 5px;
+    font-family: $font-saira;
+  }
+  .cardBottom {
+    font-size: 26px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    height: 60px;
+    background: linear-gradient($color-orange, gold);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    label {
+      font-size: 18px;
+      font-family: $font-saira;
+      cursor: pointer;
+    }
+    .iconFav {
+      color: $color-terra;
+      margin: 0 20px;
+      cursor: pointer;
+    }
+  }
+}
