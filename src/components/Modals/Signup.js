@@ -89,7 +89,7 @@ const Signup = (props) => {
           });
 
           const response = await axios.post(
-            "http://localhost:5000/signup",
+            "https://marvel-backend-chris.herokuapp.com/signup",
             data
           );
           Cookies.set("tokenMarvel", response.data.token);

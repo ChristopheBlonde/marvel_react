@@ -17,7 +17,7 @@ const Favorites = ({ validationHero }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:5000/favorites/${id}`,
+        `https://marvel-backend-chris.herokuapp.com/favorites/${id}`,
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
       setFavorites(response.data.favorites);
@@ -32,7 +32,7 @@ const Favorites = ({ validationHero }) => {
     try {
       const characters = data.characters[index];
       const res = await axios.put(
-        `http://localhost:5000/user/update/${
+        `https://marvel-backend-chris.herokuapp.com/user/update/${
           Cookies.get("infoUser").split(",")[0]
         }`,
         { characters: characters },
@@ -55,7 +55,7 @@ const Favorites = ({ validationHero }) => {
     try {
       const comics = data.comics[index];
       const res = await axios.put(
-        `http://localhost:5000/user/update/${
+        `https://marvel-backend-chris.herokuapp.com/user/update/${
           Cookies.get("infoUser").split(",")[0]
         }`,
         { comics: comics },

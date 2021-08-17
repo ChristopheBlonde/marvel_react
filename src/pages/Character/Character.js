@@ -17,7 +17,7 @@ const Character = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:5000/comics/${characterid}`
+        `https://marvel-backend-chris.herokuapp.com/comics/${characterid}`
       );
       setData(response.data);
       setIsLoading(false);
@@ -31,7 +31,7 @@ const Character = (props) => {
     try {
       if (token) {
         const res = await axios.put(
-          `http://localhost:5000/user/update/${
+          `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
           { characters: hero },
@@ -57,7 +57,7 @@ const Character = (props) => {
       if (token) {
         const comics = data.comics[index];
         const res = await axios.put(
-          `http://localhost:5000/user/update/${
+          `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
           { comics: comics },

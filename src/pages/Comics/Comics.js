@@ -47,12 +47,12 @@ const Comics = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:5000/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
+        `https://marvel-backend-chris.herokuapp.com/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
       );
       if (token) {
         const fetchDataFavorite = async () => {
           const res = await axios.get(
-            `http://localhost:5000/favorites/${
+            `https://marvel-backend-chris.herokuapp.com/favorites/${
               Cookies.get("infoUser").split(",")[0]
             }`,
             {
@@ -82,7 +82,7 @@ const Comics = (props) => {
       if (token) {
         const comics = data.results[index];
         const res = await axios.put(
-          `http://localhost:5000/user/update/${
+          `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
           { comics: comics },
