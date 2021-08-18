@@ -48,6 +48,7 @@ const Comics = (props) => {
     const fetchData = async () => {
       const response = await axios.get(
         `https://marvel-backend-chris.herokuapp.com/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
+        // `http://localhost:5000/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
       );
       if (token) {
         const fetchDataFavorite = async () => {
@@ -55,6 +56,9 @@ const Comics = (props) => {
             `https://marvel-backend-chris.herokuapp.com/favorites/${
               Cookies.get("infoUser").split(",")[0]
             }`,
+            // `http://localhost:5000/favorites/${
+            //   Cookies.get("infoUser").split(",")[0]
+            // }`,
             {
               headers: {
                 authorization: `Bearer ${Cookies.get("tokenMarvel")}`,
@@ -85,7 +89,10 @@ const Comics = (props) => {
           `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
-          { comics: comics },
+          // `http://localhost:5000/user/update/${
+          //   Cookies.get("infoUser").split(",")[0]
+          // }`,
+          { comics: await comics },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
         if (res.status === 200) {

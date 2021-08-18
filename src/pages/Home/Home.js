@@ -30,6 +30,7 @@ const Home = (props) => {
     const fetchData = async () => {
       const response = await axios.get(
         `https://marvel-backend-chris.herokuapp.com/characters?name=${searchCharater}&limit=${limitCard}&page=${currentPage}`
+        // `http://localhost:5000/characters?name=${searchCharater}&limit=${limitCard}&page=${currentPage}`
       );
       setData(response.data);
       setCount(response.data.count);
@@ -43,6 +44,9 @@ const Home = (props) => {
           `https://marvel-backend-chris.herokuapp.com/favorites/${
             Cookies.get("infoUser").split(",")[0]
           }`,
+          // `http://localhost:5000/favorites/${
+          //   Cookies.get("infoUser").split(",")[0]
+          // }`,
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
         setFavorites(res.data.favorites);
@@ -82,6 +86,9 @@ const Home = (props) => {
           `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
+          // `http://localhost:5000/user/update/${
+          //   Cookies.get("infoUser").split(",")[0]
+          // }`,
           { characters: characters },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );

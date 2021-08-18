@@ -18,6 +18,7 @@ const Character = (props) => {
     const fetchData = async () => {
       const response = await axios.get(
         `https://marvel-backend-chris.herokuapp.com/comics/${characterid}`
+        // `http://localhost:5000/comics/${characterid}`
       );
       setData(response.data);
       setIsLoading(false);
@@ -34,6 +35,9 @@ const Character = (props) => {
           `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
+          // `http://localhost:5000/user/update/${
+          //   Cookies.get("infoUser").split(",")[0]
+          // }`,
           { characters: hero },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
@@ -60,6 +64,9 @@ const Character = (props) => {
           `https://marvel-backend-chris.herokuapp.com/user/update/${
             Cookies.get("infoUser").split(",")[0]
           }`,
+          // `http://localhost:5000/user/update/${
+          //   Cookies.get("infoUser").split(",")[0]
+          // }`,
           { comics: comics },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
@@ -86,6 +93,7 @@ const Character = (props) => {
       <h1>Hero : {data.name}</h1>
       <div className="heroComics">
         <CardHeroes
+          key={data._id}
           name={data.name}
           path={data.thumbnail.path}
           extension={data.thumbnail.extension}
@@ -101,20 +109,16 @@ const Character = (props) => {
       <div className="containerCard">
         {data.comics.map((elem, index) => {
           return (
-            <div key={elem._id}>
-              <CardComics
-                _id={elem.id}
-                name={elem.title}
-                path={elem.thumbnail.path}
-                extension={elem.thumbnail.extension}
-                description={elem.description}
-                index={index}
-                handleFavorites={handleFavoritesComics}
-              />
-              {validationFavoritesHero === index ? (
-                <p className="validated">{validationHero}</p>
-              ) : null}
-            </div>
+            <CardComics
+              key={elem._id}
+              _id={elem.id}
+              name={elem.title}
+              path={elem.thumbnail.path}
+              extension={elem.thumbnail.extension}
+              description={elem.description}
+              index={index}
+              handleFavorites={handleFavoritesComics}
+            />
           );
         })}
       </div>
