@@ -7,8 +7,8 @@ import logoReact from "./images/logo_react.png";
 const Footer = () => {
   return (
     <footer>
-      <div className="container">
-        <nav className="nav">
+      <div className="containerFooter">
+        <nav className="navFooter">
           <span>Made with</span>
           <a href="https://create-react-app.dev/">
             <img src={logoReact} alt="logo react" />

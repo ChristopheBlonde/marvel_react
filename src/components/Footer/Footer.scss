@@ -4,12 +4,12 @@
 
 $font-indie: "Indie Flower", cursive;
 $font-gothic: "Gothic A1", sans-serif;
-.container {
+.containerFooter {
   margin: 100px auto 0 auto;
   padding-top: 50px;
   font-family: $font-gothic;
   background: linear-gradient($color-stone, $color-honey);
-  nav {
+  .navFooter {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,16 +53,16 @@ $font-gothic: "Gothic A1", sans-serif;
       display: none;
     }
   }
-  nav a:nth-child(2) {
+  .navFooter a:nth-child(2) {
     position: absolute;
     left: 20px;
     top: 10px;
   }
-  nav a:nth-child(4) {
+  .navFooter a:nth-child(4) {
     position: absolute;
     top: 55px;
   }
-  a:nth-child(6) {
+  .navFooter a:nth-child(6) {
     position: absolute;
     top: 95px;
     left: 200px;
