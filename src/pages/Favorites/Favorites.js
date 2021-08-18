@@ -119,7 +119,7 @@ const Favorites = ({ validationHero }) => {
       <div className="content">
         <h3>les Comics</h3>
         <div className="favoritesComics">
-          {data.characters.length === 0 ? (
+          {data.comics.length === 0 ? (
             <div className="emptyFavorites">
               Tu n'as pas encore de Comics en favoris
             </div>
