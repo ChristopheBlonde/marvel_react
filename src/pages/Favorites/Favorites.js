@@ -1,5 +1,5 @@
 import "./Favorites.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import CardComics from "../../components/CardComics/CardComics";
 import CardHeroes from "../../components/CardHeroes/CardHeroes";
@@ -14,25 +14,26 @@ const Favorites = ({ validationHero }) => {
   const [favorites, setFavorites] = useState();
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(
-        `https://marvel-backend-chris.herokuapp.com/favorites/${id}`,
-        // `http://localhost:5000/favorites/${id}`,
-        { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
-      );
-      setFavorites(response.data.favorites);
-      setData(response.data.favorites);
-      setIsLoading(false);
-    };
-    fetchData();
+  const fetchData = useCallback(async () => {
+    const response = await axios.get(
+      `https://marvel-backend-chris.herokuapp.com/favorites/${id}`,
+      // `http://localhost:5000/favorites/${id}`,
+      { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
+    );
+    setFavorites(response.data.favorites);
+    setData(response.data.favorites);
+    setIsLoading(false);
   }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   /* Add in favorites */
   const handleFavorites = async (index) => {
     try {
       const characters = data.characters[index];
-      const res = await axios.put(
+      await axios.put(
         `https://marvel-backend-chris.herokuapp.com/user/update/${
           Cookies.get("infoUser").split(",")[0]
         }`,
@@ -42,14 +43,7 @@ const Favorites = ({ validationHero }) => {
         { characters: characters },
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
-
-      if (res.status === 200) {
-        setFavorites(res.data.favorites);
-        setValidationFavoritesHero(index);
-        setTimeout(() => {
-          setValidationFavoritesHero(false);
-        }, 2000);
-      }
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +52,7 @@ const Favorites = ({ validationHero }) => {
   const handleFavoritesComics = async (index) => {
     try {
       const comics = data.comics[index];
-      const res = await axios.put(
+      await axios.put(
         `https://marvel-backend-chris.herokuapp.com/user/update/${
           Cookies.get("infoUser").split(",")[0]
         }`,
@@ -68,13 +62,7 @@ const Favorites = ({ validationHero }) => {
         { comics: comics },
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
-      if (res.status === 200) {
-        setFavorites(res.data.favorites);
-        setValidationFavoritesHero(index);
-        setTimeout(() => {
-          setValidationFavoritesHero(false);
-        }, 2000);
-      }
+      fetchData();
     } catch (error) {
       console.log(error);
     }

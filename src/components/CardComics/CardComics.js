@@ -24,7 +24,7 @@ const CardComics = (props) => {
       return checkCard;
     });
   }
-
+  console.log(favorites);
   return (
     <div>
       <div className="cardComics">

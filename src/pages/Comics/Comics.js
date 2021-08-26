@@ -96,6 +96,7 @@ const Comics = (props) => {
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
         if (res.status === 200) {
+          setFavorites(res.data.favorites);
           setValidationFavoritesHero(index);
           setTimeout(() => {
             setValidationFavoritesHero(false);

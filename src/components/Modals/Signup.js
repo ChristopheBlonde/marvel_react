@@ -46,6 +46,7 @@ const Signup = (props) => {
   } = props;
   const [file, setFile] = useState();
   const [image, setImage] = useState(null);
+  const [disable, setDisable] = useState(false);
 
   /* hidden password */
 
@@ -81,6 +82,7 @@ const Signup = (props) => {
         })}
         onSubmit={async (values, { setSubmitting, submitting }) => {
           const data = new FormData();
+          setDisable(true);
 
           data.append("picture", file);
           const key = Object.keys(values);
@@ -106,6 +108,7 @@ const Signup = (props) => {
             if (!submitting) {
               setToken(true);
               closeModal();
+              setDisable(false);
             }
           }, 400);
         }}
@@ -156,7 +159,9 @@ const Signup = (props) => {
               <img src={image} alt="" />{" "}
             </div>
           ) : null}
-          <button type="submit">S'inscrire</button>
+          <button disabled={disable} type="submit">
+            S'inscrire
+          </button>
         </Form>
       </Formik>
       <p onClick={toggleModal}>Déjà un compte ? connecte-toi !</p>

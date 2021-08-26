@@ -49,7 +49,7 @@ const CaedHeroes = (props) => {
           </label>
         </div>
       </div>
-      {validationFavoritesHero === index ? (
+      {validationFavoritesHero === index || validationFavoritesHero === true ? (
         <p className="validated">{validationHero}</p>
       ) : null}
     </div>
