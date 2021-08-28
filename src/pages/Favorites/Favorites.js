@@ -12,7 +12,6 @@ const Favorites = ({ validationHero }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState();
-  const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
 
   const fetchData = useCallback(async () => {
     const response = await axios.get(
@@ -95,7 +94,6 @@ const Favorites = ({ validationHero }) => {
                     index={index}
                     favorites={favorites}
                     handleFavorites={handleFavorites}
-                    validationFavoritesHero={validationFavoritesHero}
                     validationHero={validationHero}
                   />
                 </div>
@@ -124,7 +122,6 @@ const Favorites = ({ validationHero }) => {
                     index={index}
                     handleFavorites={handleFavoritesComics}
                     favorites={favorites}
-                    validationFavoritesHero={validationFavoritesHero}
                     validationHero={validationHero}
                   />
                 </div>
