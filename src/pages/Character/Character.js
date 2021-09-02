@@ -134,7 +134,7 @@ const Character = (props) => {
           return (
             <CardComics
               key={elem._id}
-              _id={elem.id}
+              _id={elem._id}
               name={elem.title}
               path={elem.thumbnail.path}
               extension={elem.thumbnail.extension}
