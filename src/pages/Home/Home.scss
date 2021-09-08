@@ -25,53 +25,6 @@
   }
 }
 
-/* Paging */
-.paging {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: $font-saira;
-  font-size: 20px;
-  select {
-    margin-left: 10px;
-    border-radius: 5px;
-    font-size: 20px;
-    outline: none;
-  }
-  .pagingNum {
-    margin-top: 20px;
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
-    border-radius: 25px;
-    .num {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      height: 35px;
-      width: 35px;
-      margin-right: 5px;
-      flex-shrink: 0;
-      background: linear-gradient(45deg, $color-yellow, $color-honey);
-    }
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    /* Hide scrollbar for IE, Edge and Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-
-    a {
-      color: $color-terra;
-      text-decoration: none;
-    }
-  }
-}
-
 /* Cards heroes & comics */
 .containerCard {
   display: flex;

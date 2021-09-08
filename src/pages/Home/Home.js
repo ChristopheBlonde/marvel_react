@@ -1,11 +1,12 @@
 import "./Home.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import * as qs from "qs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import Cookies from "js-cookie";
+import Paging from "../../components/Paging/Paging";
 
 const Home = (props) => {
   const {
@@ -62,20 +63,6 @@ const Home = (props) => {
     setSearchCharacter(event.target.value);
   };
 
-  /* paging */
-  const handleChangeLimit = (event) => {
-    setLimitCard(event.target.value);
-  };
-
-  const pagesNumber = Math.ceil(count / limitCard);
-  const arrPages = [];
-  for (let i = 1; i <= pagesNumber; i++) {
-    arrPages.push(
-      <div className="num">
-        <Link to={`/?page=${i}&limit=${limitCard}`}>{i}</Link>
-      </div>
-    );
-  }
   /* add in favorites */
   const handleFavorites = async (index) => {
     try {
@@ -129,24 +116,14 @@ const Home = (props) => {
         </div>
       </div>
 
-      <div className="paging">
-        <div>
-          <label htmlFor="numberHeros">Nombre de héros par page</label>
-          <select
-            value={limitCard}
-            onChange={handleChangeLimit}
-            name="numberHeroes"
-            id="numberHeroes"
-          >
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="60">60</option>
-            <option value="80">80</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-        <div className="pagingNum">{arrPages}</div>
-      </div>
+      <Paging
+        onPage={currentPage}
+        itemCount={count}
+        itemLimit={limitCard}
+        setLimitCard={setLimitCard}
+        title="héros"
+        url="/"
+      />
       <div className="containerCard">
         {data.results.map((elem, index) => {
           return (

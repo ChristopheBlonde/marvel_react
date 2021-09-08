@@ -12,13 +12,23 @@ import Cookies from "js-cookie";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faArrowLeft,
+  faArrowRight,
   faEye,
   faEyeSlash,
   faSearch,
   faStar,
   faWindowClose,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faStar, faSearch, faWindowClose, faEye, faEyeSlash);
+library.add(
+  faStar,
+  faSearch,
+  faWindowClose,
+  faEye,
+  faEyeSlash,
+  faArrowLeft,
+  faArrowRight
+);
 
 function App() {
   const [count, setCount] = useState("");
