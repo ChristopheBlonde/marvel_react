@@ -35,15 +35,14 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-const Signup = (props) => {
-  const {
-    modalIsOpen,
-    closeModal,
-    toggleModal,
-    setToken,
-    hidePassword,
-    setHidePassword,
-  } = props;
+const Signup = ({
+  modalIsOpen,
+  closeModal,
+  toggleModal,
+  setToken,
+  hidePassword,
+  setHidePassword,
+}) => {
   const [file, setFile] = useState();
   const [image, setImage] = useState(null);
   const [disable, setDisable] = useState(false);

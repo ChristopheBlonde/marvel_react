@@ -8,17 +8,15 @@ import axios from "axios";
 import * as qs from "qs";
 import Paging from "../../components/Paging/Paging";
 
-const Comics = (props) => {
-  const {
-    count,
-    setCount,
-    limitCard,
-    setLimitCard,
-    validationHero,
-    token,
-    openModalLogin,
-  } = props;
-
+const Comics = ({
+  count,
+  setCount,
+  limitCard,
+  setLimitCard,
+  validationHero,
+  token,
+  openModalLogin,
+}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [searchComics, setSearchComics] = useState("");

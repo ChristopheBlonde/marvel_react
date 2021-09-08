@@ -21,6 +21,7 @@
   .favoritesComics {
     display: flex;
     justify-content: flex-start;
+    padding-left: 20px;
     overflow-x: scroll;
     /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
@@ -42,4 +43,33 @@
     font-size: 24px;
     color: navy;
   }
+}
+.containerScroll {
+  position: relative;
+  width: 100%;
+}
+
+.scrollLeft,
+.scrollRight,
+.scrollLeftHero,
+.scrollRightHero {
+  position: absolute;
+  top: 250px;
+  font-size: 40px;
+  &:hover {
+    color: $color-terra;
+    transform: scale(1.2);
+  }
+}
+.scrollRight,
+.scrollRightHero {
+  right: 0px;
+}
+.scrollLeft,
+.scrollLeftHero {
+  left: 10px;
+}
+.scrollLeftHero,
+.scrollRightHero {
+  top: 350px;
 }

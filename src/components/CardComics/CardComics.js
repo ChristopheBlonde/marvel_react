@@ -1,20 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CardComics.scss";
 
-const CardComics = (props) => {
-  const {
-    name,
-    path,
-    extension,
-    description,
-    index,
-    handleFavorites,
-    validationFavoritesHero,
-    validationHero,
-    favorites,
-    _id,
-  } = props;
-
+const CardComics = ({
+  name,
+  path,
+  extension,
+  description,
+  index,
+  handleFavorites,
+  validationFavoritesHero,
+  validationHero,
+  favorites,
+  _id,
+}) => {
   let checkCard = false;
   if (favorites) {
     favorites.comics.forEach((elem) => {
@@ -24,7 +22,7 @@ const CardComics = (props) => {
       return checkCard;
     });
   }
-  console.log(favorites);
+
   return (
     <div>
       <div className="cardComics">

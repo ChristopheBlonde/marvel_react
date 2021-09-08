@@ -22,16 +22,15 @@ const customStyles = {
 };
 Modal.setAppElement("body");
 
-const Login = (props) => {
-  const {
-    modalIsOpen,
-    closeModal,
-    toggleModal,
-    locationModal,
-    setToken,
-    hidePassword,
-    setHidePassword,
-  } = props;
+const Login = ({
+  modalIsOpen,
+  closeModal,
+  toggleModal,
+  locationModal,
+  setToken,
+  hidePassword,
+  setHidePassword,
+}) => {
   const history = useHistory();
 
   /* hidden password */

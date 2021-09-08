@@ -2,20 +2,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import "./CardHeroes.scss";
 
-const CaedHeroes = (props) => {
-  const {
-    name,
-    _id,
-    path,
-    extension,
-    description,
-    index,
-    handleFavorites,
-    validationFavoritesHero,
-    validationHero,
-    favorites,
-  } = props;
-
+const CaedHeroes = ({
+  name,
+  _id,
+  path,
+  extension,
+  description,
+  index,
+  handleFavorites,
+  validationFavoritesHero,
+  validationHero,
+  favorites,
+}) => {
   let checkCard = false;
   if (favorites) {
     favorites.characters.forEach((elem) => {

@@ -8,17 +8,15 @@ import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import Cookies from "js-cookie";
 import Paging from "../../components/Paging/Paging";
 
-const Home = (props) => {
-  const {
-    count,
-    setCount,
-    limitCard,
-    setLimitCard,
-    token,
-    validationHero,
-    openModalLogin,
-  } = props;
-
+const Home = ({
+  count,
+  setCount,
+  limitCard,
+  setLimitCard,
+  token,
+  validationHero,
+  openModalLogin,
+}) => {
   const [searchCharater, setSearchCharacter] = useState("");
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);

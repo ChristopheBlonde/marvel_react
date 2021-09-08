@@ -106,7 +106,7 @@ const Character = (props) => {
       console.log(error);
     }
   };
-  console.log(favorites);
+
   return isLoading ? (
     <div className="loading">
       <div>Chargement en cours...</div>

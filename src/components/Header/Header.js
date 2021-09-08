@@ -8,19 +8,17 @@ import Login from "../Modals/Login";
 import Signup from "../Modals/Signup";
 import Cookies from "js-cookie";
 
-const Header = (props) => {
-  const {
-    token,
-    setToken,
-    openModalLogin,
-    closeModalLogin,
-    openModalSignup,
-    closeModalSignup,
-    toggleModal,
-    modalIsOpen,
-    modalIsOpenSignup,
-  } = props;
-
+const Header = ({
+  token,
+  setToken,
+  openModalLogin,
+  closeModalLogin,
+  openModalSignup,
+  closeModalSignup,
+  toggleModal,
+  modalIsOpen,
+  modalIsOpenSignup,
+}) => {
   const [locationModal, setLocationModal] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
@@ -55,7 +53,9 @@ const Header = (props) => {
           <img className="heroImgHeader1" src={spiderGirl} alt="vision" />
         </div>
         <div className="logo">
-          <img src={logo} alt="logo marvel" />
+          <Link to="/">
+            <img src={logo} alt="logo marvel" />
+          </Link>
         </div>
         <div>
           <img className="heroImgHeader2" src={groot} alt="thor" />
