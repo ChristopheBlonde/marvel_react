@@ -14,6 +14,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowLeft,
   faArrowRight,
+  faChevronDown,
+  faChevronUp,
   faEye,
   faEyeSlash,
   faSearch,
@@ -27,7 +29,9 @@ library.add(
   faEye,
   faEyeSlash,
   faArrowLeft,
-  faArrowRight
+  faArrowRight,
+  faChevronDown,
+  faChevronUp
 );
 
 function App() {

@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import * as qs from "qs";
 import Paging from "../../components/Paging/Paging";
+import vision from "../../images/vision.png";
 require("dotenv").config();
 
 const Comics = ({
@@ -23,6 +24,7 @@ const Comics = ({
   const [searchComics, setSearchComics] = useState("");
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
   const [favorites, setFavorites] = useState();
+  const [scroll, setScroll] = useState(false);
 
   const urlServer = process.env.REACT_APP_URL_SERVER;
   /* paging */
@@ -54,6 +56,16 @@ const Comics = ({
       setData(response.data);
       setIsLoading(false);
     };
+    /* Scroll visibility */
+    const toggleScrollToTop = () => {
+      if (window.pageYOffset > 600) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleScrollToTop);
     fetchData();
   }, [searchComics, setCount, limitCard, currentPage, token, urlServer]);
 
@@ -67,7 +79,7 @@ const Comics = ({
         const comics = data.results[index];
         const res = await axios.put(
           `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
-          { comics: await comics },
+          { comics: comics },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
         if (res.status === 200) {
@@ -83,6 +95,11 @@ const Comics = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  /* Scroll to top */
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return isLoading ? (
@@ -104,6 +121,13 @@ const Comics = ({
           <FontAwesomeIcon className="iconSearch" icon="search" />
         </div>
       </div>
+
+      {scroll ? (
+        <div onClick={scrollToTop} className="scrollToUp">
+          <FontAwesomeIcon className="iconScroll" icon="chevron-up" />
+          <img className="scrollImg" src={vision} alt="thor" />
+        </div>
+      ) : null}
 
       <Paging
         onPage={currentPage}

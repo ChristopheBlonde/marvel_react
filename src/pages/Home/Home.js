@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import Cookies from "js-cookie";
 import Paging from "../../components/Paging/Paging";
+import thor from "../../images/thor.png";
 require("dotenv").config();
 
 const Home = ({
@@ -23,6 +24,8 @@ const Home = ({
   const [isLoading, setIsLoading] = useState(true);
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
   const [favorites, setFavorites] = useState();
+  const [scroll, setScroll] = useState(false);
+
   const location = useLocation();
   const currentPage = qs.parse(location.search.substring(1)).page;
 
@@ -49,6 +52,16 @@ const Home = ({
       };
       fetchDataFavorite();
     }
+    /* Scroll visibility */
+    const toggleScrollToTop = () => {
+      if (window.pageYOffset > 600) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleScrollToTop);
 
     fetchData();
   }, [searchCharater, limitCard, currentPage, setCount, token, urlServer]);
@@ -85,6 +98,10 @@ const Home = ({
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return isLoading ? (
     <div className="loading">
       <div>Chargement en cours...</div>
@@ -114,6 +131,14 @@ const Home = ({
         title="héros"
         url="/"
       />
+
+      {scroll ? (
+        <div onClick={scrollToTop} className="scrollToUp">
+          <FontAwesomeIcon className="iconScroll" icon="chevron-up" />
+          <img className="scrollImg" src={thor} alt="thor" />
+        </div>
+      ) : null}
+
       <div className="containerCard">
         {data.results.map((elem, index) => {
           return (

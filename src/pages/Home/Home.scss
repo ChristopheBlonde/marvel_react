@@ -1,6 +1,29 @@
 /* Variables */
 @import "../../variables.scss";
 
+/* scroll navigation */
+.scrollToUp {
+  position: fixed;
+  bottom: 50px;
+  right: 0px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100px;
+  font-size: 40px;
+
+  .scrollImg {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+  }
+  .iconScroll {
+    margin-right: 35px;
+  }
+}
+
 /* Home/Characters search */
 .inputSearch {
   display: flex;

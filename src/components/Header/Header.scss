@@ -38,4 +38,62 @@ nav {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+/* User logged */
+.userLogged {
+  display: flex;
+  align-items: center;
+
+  .userConnected {
+    display: flex;
+    align-items: center;
+    img {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      margin-right: 10px;
+    }
+    .userName {
+      font-family: $font-saira;
+      font-size: 28px;
+    }
+  }
+}
+
+@media (max-width: 1140px) {
+  header {
+    .headerImg {
+      .heroImgHeader1 {
+        width: 150px;
+      }
+      .heroImgHeader2 {
+        width: 150px;
+        height: 220px;
+      }
+    }
+    .logo {
+      img {
+        width: 450px;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .navHeader {
+    flex-direction: column;
+    .noUser,
+    .userLogged {
+      margin-top: 10px;
+    }
+  }
+  header {
+    .logo {
+      img {
+        width: 200px;
+      }
+    }
+  }
 }

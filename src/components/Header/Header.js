@@ -50,7 +50,7 @@ const Header = ({
     <header>
       <div className="headerImg content">
         <div>
-          <img className="heroImgHeader1" src={spiderGirl} alt="vision" />
+          <img className="heroImgHeader1" src={spiderGirl} alt="spider girl" />
         </div>
         <div className="logo">
           <Link to="/">
@@ -62,7 +62,7 @@ const Header = ({
         </div>
       </div>
 
-      <nav className="content">
+      <nav className="content navHeader">
         <div>
           <Link to="/">
             <button>Personnages</button>
@@ -81,11 +81,17 @@ const Header = ({
           </Link>
         </div>
         {token ? (
-          <div>
-            <button onClick={handleDisconnect}>Déconnexion</button>
+          <div className="userLogged">
+            <button className="btnDisconnect" onClick={handleDisconnect}>
+              Déconnexion
+            </button>
+            <div className="userConnected">
+              <img src={user.split(",")[2]} alt="avatar user" />
+              <span className="userName">{user.split(",")[1]}</span>
+            </div>
           </div>
         ) : (
-          <div>
+          <div className="noUser">
             <button onClick={openModalSignup}>S'inscrire</button>
             <button onClick={openModalLogin}>Se connecter</button>
           </div>
