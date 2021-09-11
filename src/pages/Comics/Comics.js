@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import * as qs from "qs";
 import Paging from "../../components/Paging/Paging";
+require("dotenv").config();
 
 const Comics = ({
   count,
@@ -22,6 +23,8 @@ const Comics = ({
   const [searchComics, setSearchComics] = useState("");
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
   const [favorites, setFavorites] = useState();
+
+  const urlServer = process.env.REACT_APP_URL_SERVER;
   /* paging */
 
   const location = useLocation();
@@ -30,18 +33,12 @@ const Comics = ({
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://marvel-backend-chris.herokuapp.com/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
-        // `http://localhost:5000/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
+        `${urlServer}/comics?title=${searchComics}&limit=${limitCard}&page=${currentPage}`
       );
       if (token) {
         const fetchDataFavorite = async () => {
           const res = await axios.get(
-            `https://marvel-backend-chris.herokuapp.com/favorites/${
-              Cookies.get("infoUser").split(",")[0]
-            }`,
-            // `http://localhost:5000/favorites/${
-            //   Cookies.get("infoUser").split(",")[0]
-            // }`,
+            `${urlServer}/favorites/${Cookies.get("infoUser").split(",")[0]}`,
             {
               headers: {
                 authorization: `Bearer ${Cookies.get("tokenMarvel")}`,
@@ -58,7 +55,7 @@ const Comics = ({
       setIsLoading(false);
     };
     fetchData();
-  }, [searchComics, setCount, limitCard, currentPage, token]);
+  }, [searchComics, setCount, limitCard, currentPage, token, urlServer]);
 
   const handleChangeComic = (event) => {
     setSearchComics(event.target.value);
@@ -69,12 +66,7 @@ const Comics = ({
       if (token) {
         const comics = data.results[index];
         const res = await axios.put(
-          `https://marvel-backend-chris.herokuapp.com/user/update/${
-            Cookies.get("infoUser").split(",")[0]
-          }`,
-          // `http://localhost:5000/user/update/${
-          //   Cookies.get("infoUser").split(",")[0]
-          // }`,
+          `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
           { comics: await comics },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );

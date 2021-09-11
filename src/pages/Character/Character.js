@@ -5,6 +5,7 @@ import CardComics from "../../components/CardComics/CardComics";
 import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import Cookies from "js-cookie";
 import axios from "axios";
+require("dotenv").config();
 
 const Character = (props) => {
   const { validationHero, token, openModalLogin } = props;
@@ -15,29 +16,22 @@ const Character = (props) => {
   const [validationFavoritesHero, setValidationFavoritesHero] = useState(false);
   const [favorites, setFavorites] = useState();
 
-  const fetchDataFavorite = async () => {
-    const res = await axios.get(
-      `https://marvel-backend-chris.herokuapp.com/favorites/${
-        Cookies.get("infoUser").split(",")[0]
-      }`,
-      // `http://localhost:5000/favorites/${
-      //   Cookies.get("infoUser").split(",")[0]
-      // }`,
-      {
-        headers: {
-          authorization: `Bearer ${Cookies.get("tokenMarvel")}`,
-        },
-      }
-    );
-    setFavorites(res.data.favorites);
-  };
+  const urlServer = process.env.REACT_APP_URL_SERVER;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(
-        `https://marvel-backend-chris.herokuapp.com/comics/${characterid}`
-        // `http://localhost:5000/comics/${characterid}`
+    const fetchDataFavorite = async () => {
+      const res = await axios.get(
+        `${urlServer}/favorites/${Cookies.get("infoUser").split(",")[0]}`,
+        {
+          headers: {
+            authorization: `Bearer ${Cookies.get("tokenMarvel")}`,
+          },
+        }
       );
+      setFavorites(res.data.favorites);
+    };
+    const fetchData = async () => {
+      const response = await axios.get(`${urlServer}/comics/${characterid}`);
       if (token) {
         fetchDataFavorite();
       }
@@ -45,7 +39,7 @@ const Character = (props) => {
       setIsLoading(false);
     };
     fetchData();
-  }, [characterid, token]);
+  }, [characterid, token, urlServer]);
 
   /* Add hero to favorites */
   const handleFavoritesHero = async () => {
@@ -53,12 +47,7 @@ const Character = (props) => {
     try {
       if (token) {
         const res = await axios.put(
-          `https://marvel-backend-chris.herokuapp.com/user/update/${
-            Cookies.get("infoUser").split(",")[0]
-          }`,
-          // `http://localhost:5000/user/update/${
-          //   Cookies.get("infoUser").split(",")[0]
-          // }`,
+          `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
           { characters: hero },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );
@@ -83,12 +72,7 @@ const Character = (props) => {
       if (token) {
         const comics = data.comics[index];
         const res = await axios.put(
-          `https://marvel-backend-chris.herokuapp.com/user/update/${
-            Cookies.get("infoUser").split(",")[0]
-          }`,
-          // `http://localhost:5000/user/update/${
-          //   Cookies.get("infoUser").split(",")[0]
-          // }`,
+          `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
           { comics: comics },
           { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
         );

@@ -6,6 +6,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+require("dotenv").config();
+
+const urlServer = process.env.REACT_APP_URL_SERVER;
 
 /* React-modal */
 const customStyles = {
@@ -52,10 +55,7 @@ const Login = ({
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(
-          "https://marvel-backend-chris.herokuapp.com/login",
-          values
-        );
+        const response = await axios.post(`${urlServer}/login`, values);
         Cookies.set(
           "infoUser",
           `${response.data._id},${response.data.account.username},${

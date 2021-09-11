@@ -6,6 +6,7 @@ import CardHeroes from "../../components/CardHeroes/CardHeroes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Cookies from "js-cookie";
+require("dotenv").config();
 
 const Favorites = ({ validationHero }) => {
   const { id } = useParams();
@@ -14,16 +15,16 @@ const Favorites = ({ validationHero }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState();
 
+  const urlServer = process.env.REACT_APP_URL_SERVER;
+
   const fetchData = useCallback(async () => {
-    const response = await axios.get(
-      `https://marvel-backend-chris.herokuapp.com/favorites/${id}`,
-      // `http://localhost:5000/favorites/${id}`,
-      { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
-    );
+    const response = await axios.get(`${urlServer}/favorites/${id}`, {
+      headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` },
+    });
     setFavorites(response.data.favorites);
     setData(response.data.favorites);
     setIsLoading(false);
-  }, [id]);
+  }, [id, urlServer]);
 
   useEffect(() => {
     fetchData();
@@ -34,12 +35,7 @@ const Favorites = ({ validationHero }) => {
     try {
       const characters = data.characters[index];
       await axios.put(
-        `https://marvel-backend-chris.herokuapp.com/user/update/${
-          Cookies.get("infoUser").split(",")[0]
-        }`,
-        // `http://localhost:5000/user/update/${
-        //   Cookies.get("infoUser").split(",")[0]
-        // }`,
+        `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
         { characters: characters },
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );
@@ -53,12 +49,7 @@ const Favorites = ({ validationHero }) => {
     try {
       const comics = data.comics[index];
       await axios.put(
-        `https://marvel-backend-chris.herokuapp.com/user/update/${
-          Cookies.get("infoUser").split(",")[0]
-        }`,
-        // `http://localhost:5000/user/update/${
-        //   Cookies.get("infoUser").split(",")[0]
-        // }`,
+        `${urlServer}/user/update/${Cookies.get("infoUser").split(",")[0]}`,
         { comics: comics },
         { headers: { authorization: `Bearer ${Cookies.get("tokenMarvel")}` } }
       );

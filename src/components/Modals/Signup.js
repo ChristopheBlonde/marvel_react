@@ -6,6 +6,9 @@ import * as Yup from "yup";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+require("dotenv").config();
+
+const urlServer = process.env.REACT_APP_URL_SERVER;
 
 /* React-modal */
 const customStyles = {
@@ -89,11 +92,7 @@ const Signup = ({
             return data.append(elem, values[elem]);
           });
 
-          const response = await axios.post(
-            "https://marvel-backend-chris.herokuapp.com/signup",
-            // "http://localhost:5000/signup",
-            data
-          );
+          const response = await axios.post(`${urlServer}/signup`, data);
           Cookies.set("tokenMarvel", response.data.token);
           Cookies.set(
             "infoUser",
